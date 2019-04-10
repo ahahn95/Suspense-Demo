@@ -65,7 +65,7 @@ const App = () => {
   console.log(state);
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div className="App">
+      <div className="App" >
         <WeatherTable cities={state.cities} handler={city => dispatch({
           type: 'setSelected',
           payload: city

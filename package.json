@@ -11,13 +11,15 @@
     "react-modal": "^3.8.1",
     "react-scripts": "2.1.8",
     "rxjs": "^6.4.0",
+    "source-map-explorer": "^1.8.0",
     "victory": "^32.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "eslintConfig": {
     "extends": "react-app"
