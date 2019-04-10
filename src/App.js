@@ -5,7 +5,8 @@ import { from } from 'rxjs';
 import { map, tap, concatMap } from 'rxjs/operators'
 import queryString from 'query-string';
 import WeatherTable from './components/WeatherTable';
-const WeatherChart = lazy(() => import('./components/WeatherChart'));
+import WeatherChart from './components/WeatherChart';
+// const WeatherChart = lazy(() => import('./components/WeatherChart'));
 
 const App = () => {
 
@@ -62,9 +63,8 @@ const App = () => {
       )
   }, [])
 
-  console.log(state);
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    // <Suspense fallback={<div>Loading...</div>}>
       <div className="App" >
         <WeatherTable cities={state.cities} handler={city => dispatch({
           type: 'setSelected',
@@ -75,7 +75,7 @@ const App = () => {
           payload: null
         })} />}
       </div>
-    </Suspense>
+    // </Suspense>
   )
 }
 
