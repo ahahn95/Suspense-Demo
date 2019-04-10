@@ -1,19 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Modal from 'react-modal';
-import { VictoryBar, VictoryLabel } from 'victory';
+import { VictoryBar } from 'victory';
 import moment from 'moment';
 
 import { css, jsx } from '@emotion/core'
 
 const WeatherChart = ({ city, handler }) => {
 
-
     const result = city.data.map(day => ({
         x: moment(day.valid_date).format('D'),
         y: day.temp
     }))
-
-    console.log(result);
 
     return (
         <Modal isOpen={true} onRequestClose={() => handler()}>

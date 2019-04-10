@@ -62,7 +62,6 @@ const App = () => {
       )
   }, [])
 
-  console.log(state);
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <div className="App" >
