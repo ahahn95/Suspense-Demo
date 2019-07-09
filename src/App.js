@@ -1,12 +1,14 @@
 import React, { useEffect, lazy, Suspense, useReducer } from 'react';
+import Modal from 'react-modal';
 import './App.css';
 import { ajax } from 'rxjs/ajax';
 import { from } from 'rxjs';
 import { map, tap, concatMap } from 'rxjs/operators'
 import queryString from 'query-string';
+import ReactLoading from 'react-loading';
 import WeatherTable from './components/WeatherTable';
-import WeatherChart from './components/WeatherChart';
-// const WeatherChart = lazy(() => import('./components/WeatherChart'));
+// import WeatherChart from './components/WeatherChart';
+const WeatherChart = lazy(() => import('./components/WeatherChart'));
 
 const App = () => {
 
@@ -64,19 +66,27 @@ const App = () => {
   }, [])
 
   return (
-    // <Suspense fallback={<div>Loading...</div>}>
-      <div className="App" >
-        <WeatherTable cities={state.cities} handler={city => dispatch({
-          type: 'setSelected',
-          payload: city
-        })} />
-        {!!state.selected && <WeatherChart city={state.selected} handler={() => dispatch({
-          type: 'setSelected',
-          payload: null
-        })} />}
-      </div>
-    // </Suspense>
+    <div className="App" >
+      <WeatherTable cities={state.cities} handler={city => dispatch({
+        type: 'setSelected',
+        payload: city
+      })} />
+      {!!state.selected && <Modal isOpen={true} onRequestClose={() => dispatch({
+        type: 'setSelected',
+        payload: null
+      })} appElement={document.getElementById('root')}>
+        <Suspense fallback={<Load />}>
+          <WeatherChart city={state.selected} />
+        </Suspense>
+      </Modal>
+      }
+
+    </div>
   )
 }
+
+const Load =  () => (
+  <ReactLoading type="cubes" color="#000000" />
+)
 
 export default App;
